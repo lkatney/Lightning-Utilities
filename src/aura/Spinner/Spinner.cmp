@@ -1,0 +1,29 @@
+<!-- 
+Component to display spinner/loader in lightning component. This uses lightining design system as CSS
+-->
+<aura:component >
+    <!--<ltng:require styles="/resource/slds202/assets/styles/salesforce-lightning-design-system-ltng.css"/>-->
+    <ltng:require styles="{PUT YOUR STATIC RESOURCE URL}"/><!-- If main component is calling this component, no need for this-->
+    <aura:attribute name="show" type="Boolean" access="public" default="false" />
+    <aura:attribute name="type" type="String" access="public" required="true" 
+                    description="Possible Values - small, medium, large" />
+    <aura:attribute name="spinnerCSS" type="String" access="private" description="CSS being made with type attribute - Internal attribute"/>
+    <aura:attribute name="shouldDisplay" type="String" access="private" description="Should show/hide spinner in basis of show attribute -Internal attribute"/>
+    <aura:attribute name="spinnerText" type="String" access="public" description="Text along with spinner"/>
+
+    <!-- AURA HANDLERs -->
+    <aura:handler name="init" value="{!this}" action="{!c.showHideSpinner}" />
+    <aura:handler name="change" value="{!v.show}" action="{!c.showHideSpinner}"/>
+
+    <aura:if isTrue="{!v.shouldDisplay}">
+        <div class="slds-spinner_container" aura:id="spinner">
+            <div class="slds-align--absolute-center" style="height: 100%">
+                <span class="spinner-text">{!v.spinnerText}</span>
+            </div>
+            <div class="{!v.spinnerCSS}" aria-hidden="false" role="alert">
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+</aura:component>

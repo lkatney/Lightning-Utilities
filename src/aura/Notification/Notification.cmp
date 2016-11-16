@@ -1,0 +1,73 @@
+<!-- 
+Component to display notification in lightning. This uses lightining design system as CSS
+-->
+<aura:component >
+    <!--<ltng:require styles="/resource/slds202/assets/styles/salesforce-lightning-design-system-ltng.css"/>-->
+    <ltng:require styles="{PUT YOUR STATIC RESOURCE URL}"/><!-- If main component is calling this component, no need for this-->
+    <aura:attribute name="type" required="true" type="String" default="Default" access="public" description="Type of notification - Default,Success,Warning,Offline,Error"/>
+    <aura:attribute name="message" required="true" type="String" default="" access="public" description="The message to be shown"/>
+    <aura:attribute name="show" required="true" type="Boolean" default="false" access="public" description="Set this to hide / show message"/>
+    <aura:attribute name="notificaionType" type="String" default="bar" access="public" description="type of notification to be shown i.e bar,popup"/>
+    <aura:attribute name="popupheader" type="String" default="" access="public" description="The header to be shown"/>
+    <aura:attribute name="notification" type="Map" access="private" description="information required to display all kind of messages"/>
+    <aura:attribute name="redirectUri" type="String" access="public" description="Url on which to be redirected"/>
+
+
+    <!-- Method to setNotification parameters.This is typically for bar in header as notification -->
+    <aura:method name="setNotification" action="{!c.setBar}" access="public" >
+        <aura:attribute name="notiShow" type="Boolean" default="false" access="public"/>
+        <aura:attribute name="notiType" type="String" access="public"/>
+        <aura:attribute name="notiMesg" type="String" access="public"/>
+        <aura:attribute name="notiTime" type="String" default="forever" access="public"/>
+    </aura:method>
+
+    <!-- Method to setPopup parameters.This is typically for popup as notification -->
+    <aura:method name="setPopup" action="{!c.setModal}" access="public">
+        <aura:attribute name="notiShow" type="Boolean" default="false" access="public"/>
+        <aura:attribute name="notiType" type="String" access="public"/>
+        <aura:attribute name="notiHeader" type="String" access="public"/>
+        <aura:attribute name="notiMesg" type="String" access="public"/>
+        <aura:attribute name="notiRedirectUri" type="String" access="public"/>
+        <aura:attribute name="notiFEIRelated" type="Boolean" access="public" default="false"/>
+    </aura:method>
+
+    <aura:if isTrue="{!v.show}">
+        <aura:if isTrue="{!v.notificaionType == 'bar' ? true : false}">
+            <!-- notification -->
+            <div class="slds-notify_container">
+                <div class="{!v.notification.cls}" role="alert">
+                    <button class="slds-button slds-button--icon-inverse slds-notify__close" onclick="{!c.hideNotification}">
+                        <c:svg class="slds-button__icon" xlinkHref="/resource/slds202/assets/icons/utility-sprite/svg/symbols.svg#close" ariaHidden="true"/>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2>
+                        <c:svg class="slds-icon icon-text-email slds-icon--small slds-m-right--x-small" xlinkHref="{!v.notification.icon}" ariaHidden="true"/>
+                        {!v.message}
+                    </h2>
+                </div>
+            </div>
+
+            <!-- popup -->
+            <aura:set attribute="else">
+                <div>
+                  <div aria-hidden="false" aria-labelledby="prompt-heading-id" aria-describedby="prompt-message-wrapper" role="alertdialog" class="slds-modal slds-modal--prompt slds-fade-in-open">
+                    <div class="slds-modal__container slds-modal--prompt" role="document" id="prompt-message-wrapper" tabindex="0">
+                      <div class="{!v.notification.cls}">
+                        <h2 class="slds-text-heading--medium" id="prompt-heading-id">{!v.popupheader}</h2>
+                      </div>
+                      <div class="slds-modal__content slds-p-around--medium">
+                        <div>
+                          <p>{!v.message}</p>
+                        </div>
+                      </div>
+                      <div class="slds-modal__footer slds-theme--default">
+                        <button class="slds-button slds-button--neutral" onclick="{!c.redirect}">Okay</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slds-backdrop slds-backdrop--open"></div>
+                </div>
+            </aura:set>
+        </aura:if>
+    </aura:if>
+</aura:component>
