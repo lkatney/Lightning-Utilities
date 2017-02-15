@@ -32,12 +32,16 @@ http://creativecommons.org/licenses/by/3.0/deed.en_US
         description="The resulting matches returned by the Apex controller." />
     <aura:attribute name="disabled" type="Boolean" default="false"
         description="The attribute to control readonly behaviour of lookup" />
+    <aura:attribute name="rawSOQL" type="String"
+        description="Pass raw soql to be executed" />
+    <aura:attribute name="context" type="String"
+        description="Context with which this code is working" />
 
     <!-- Handlers-->
     <aura:handler name="init" value="{!this}" action="{!c.init}" />
 
     <!-- Events -->
-	<aura:registerEvent name="updateLookupIdEvent" type="c:UpdateLookupId"/>    
+    <aura:registerEvent name="updateLookupIdEvent" type="c:UpdateLookupId"/>    
     <aura:registerEvent name="clearLookupIdEvent" type="c:ClearLookupId"/>    
     
     <!-- Lookup Markup : See https://www.lightningdesignsystem.com/components/lookups -->

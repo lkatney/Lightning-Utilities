@@ -14,6 +14,8 @@
         var inputElement = cmp.find('lookup');
         var lookupList = cmp.find('lookuplist');
         var whereClause = cmp.get('v.whereClause');
+        var rawSOQL = cmp.get('v.rawSOQL');
+        var context = cmp.get('v.context');
 
         // Clear any errors and destroy the old lookup items container
         inputElement.set('v.errors', null);
@@ -45,7 +47,7 @@
         action.setAbortable();
 
         // Set the parameters
-        action.setParams({ 'searchString' : searchString, 'sObjectAPIName' : sObjectAPIName, 'whereClause' : whereClause});
+        action.setParams({ 'searchString' : searchString, 'sObjectAPIName' : sObjectAPIName, 'whereClause' : whereClause, 'rawSOQL': rawSOQL, 'context': context});
                           
         // Define the callback
         action.setCallback(this, function(response) {
