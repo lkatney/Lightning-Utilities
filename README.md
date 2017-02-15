@@ -8,6 +8,6 @@ This package contains utilities that can be used in lightning components with li
 4. LookupSobject  
 
 This package is a deployable package and can be deployed using any other metadata tool. There is an unmanaged package as well. Below are the links  
-[Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t28000000TYcF)  
-[Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04t28000000TYcF)  
+[Production](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t28000000TYce)  
+[Sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04t28000000TYce)  
 

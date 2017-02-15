@@ -17,7 +17,7 @@ private class LookupSObjectControllerTest {
 
         Id[] fixedSearchResults = new Id[] { xyz.Id };
         Test.setFixedSearchResults(fixedSearchResults);
-        List<LookupSObjectController.Result> results = LookupSObjectController.lookup('xy', 'Account', '');
+        List<LookupSObjectController.Result> results = LookupSObjectController.lookup('xy', 'Account', '', '', '');
 
         System.assertEquals(1, results.size());
         System.assertEquals(xyz.Name, results[0].SObjectLabel);
